@@ -30,9 +30,15 @@ public protocol PlaygroundLiveViewMessageHandler {
 }
 
 public class PlaygroundPage {
+	
+	public enum AssessmentStatus {
+		case fail(hints: [String], solution: String?)
+		case pass(message: String?)
+	}
+
     public static var current = PlaygroundPage()
     public var liveView: AnyObject!
-	public var assessmentStatus: AssessmentStatus?
+	public var assessmentStatus: PlaygroundPage.AssessmentStatus?
 	public var needsIndefiniteExecution: Bool = false
 	public var text : String {
 		get {
@@ -48,9 +54,4 @@ public class PlaygroundRemoteLiveViewProxy: PlaygroundRemoteLiveView {
     public func send(_ value: PlaygroundValue) {
         
     }
-}
-
-public enum AssessmentStatus {
-	case fail(hints: [String], solution: String?)
-	case pass(message: String?)
 }
